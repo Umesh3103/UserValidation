@@ -4,119 +4,184 @@ import org.junit.Test;
 
 import org.junit.Assert;
 
-@SuppressWarnings("deprecation")
-public class UserValidationTest {
 
-	@Test
-	public void givenMessage_WhenSad_ShouldReturnSad(){
-		UserValidation validator = new UserValidation();
-		String mood = validator.AnalyseMood("This is a sad message");
-		Assert.assertEquals("SAD", mood);
-	}
+public class UserValidationTest {
 	
 	@Test
-	public void givenMessage_WhenNotSad_ShouldReturnHappy(){
+	public void givenFirstName_WhenProper_ShouldReturnTrue() throws UserValidationException{
+		try{
 		UserValidation validator = new UserValidation();
-		String mood = validator.AnalyseMood("This is a happy message");
-		Assert.assertEquals("HAPPY", mood);
-	}
-	
-	@Test
-	public void givenFirstName_WhenProper_ShouldReturnTrue(){
-		UserValidation validator = new UserValidation();
-		boolean result = validator.checkFirstName("Umesh");
+		boolean result = validator.checkFirstName("Umesh@123");
 		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_FIRSTNAME, e.exceptionType);
+		}
 	}
 	
 	@Test
-	public void givenFirstName_WhenShort_ShouldReturnFalse(){
+	public void givenFirstNameNull_ShouldReturnNull(){
+		try{
+		String name = null;
 		UserValidation validator = new UserValidation();
-		boolean result = validator.checkFirstName("Um");
-		Assert.assertFalse(result);
+		boolean flag = validator.checkFirstName(name);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+		}
+		
 	}
 	
 	@Test
-	public void givenFirstName_WhenNotProper_ShouldReturnFalse(){
+	public void givenFirstNameEmpty_ShouldReturnEmpty(){
+		try{
+		String name = "";
 		UserValidation validator = new UserValidation();
-		boolean result = validator.checkFirstName("Um@12esh");
-		Assert.assertFalse(result);
+		boolean flag = validator.checkFirstName(name);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
+		}
+		
 	}
 	
 	@Test
-	public void givenLastName_WhenProper_ShouldReturnTrue(){
+	public void givenLastName_WhenProper_ShouldReturnTrue() throws UserValidationException{
+		try{
 		UserValidation validator = new UserValidation();
 		boolean result = validator.checkLastName("Deora");
 		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_LASTNAME, e.exceptionType);
+		}
+		
 	}
 	
 	@Test
-	public void givenLastName_WhenShort_ShouldReturnFalse(){
-		UserValidation validator = new UserValidation();
-		boolean result = validator.checkLastName("De");
-		Assert.assertFalse(result);
+	public void givenLastNameNull_ShouldReturnNull(){
+		try{
+			String name = null;
+			UserValidation validator = new UserValidation();
+			boolean flag = validator.checkLastName(name);
+			}catch(UserValidationException e){
+				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+			}
+		
+	}
+
+	@Test
+	public void givenLastNameEmpty_ShouldReturnEmpty(){
+		try{
+			String name = "";
+			UserValidation validator = new UserValidation();
+			boolean flag = validator.checkLastName(name);
+			}catch(UserValidationException e){
+				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
+			}
+		
 	}
 	
 	@Test
-	public void givenLastName_WhenNotProper_ShouldReturnFalse(){
-		UserValidation validator = new UserValidation();
-		boolean result = validator.checkLastName("De12#%ora");
-		Assert.assertFalse(result);
-	}
-	
-	@Test
-	public void givenEmail_WhenProper_ShouldReturnTrue(){
+	public void givenEmail_WhenProper_ShouldReturnTrue() throws UserValidationException{
+		try{
 		UserValidation validator = new UserValidation();
 		boolean result = validator.checkEmail("abc@gmail.com");
 		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_EMAIL, e.exceptionType);
+		}
 	}
 	
 	@Test
-	public void givenEmail_WhenNotProper_ShouldReturnFalse(){
-		UserValidation validator = new UserValidation();
-		boolean result = validator.checkEmail("abc.@gmail.com");
-		Assert.assertFalse(result);
+	public void givenEmailNull_ShouldReturnNull(){
+		try{
+			String email = null;
+			UserValidation validator = new UserValidation();
+			boolean flag = validator.checkEmail(email);
+			}catch(UserValidationException e){
+				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+			}
+		
+	} 
+	
+	@Test
+	public void givenEmailEmpty_ShouldReturnEmpty(){
+		try{
+			String email = "";
+			UserValidation validator = new UserValidation();
+			boolean flag = validator.checkEmail(email);
+			}catch(UserValidationException e){
+				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
+			}
+		
 	}
 	
 	@Test
-	public void givenEmail_WhenOptionalPart1_ShouldReturnTrue(){
-		UserValidation validator = new UserValidation();
-		boolean result = validator.checkEmail("abc.xyz@gmail.com");
-		Assert.assertTrue(result);
-	}
-	
-	@Test
-	public void givenEmail_WhenOptionalPart2_ShouldReturnTrue(){
-		UserValidation validator = new UserValidation();
-		boolean result = validator.checkEmail("abc@gmail.com.in");
-		Assert.assertTrue(result);
-	}
-	
-	@Test
-	public void givenMobileNumber_WhenProper_ShouldReturnTrue(){
+	public void givenMobileNumber_WhenProper_ShouldReturnTrue() throws UserValidationException{
+		try{
 		UserValidation validator = new UserValidation();
 		boolean result = validator.checkMobNum("91 9983910255");
 		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_MOBNUMBER, e.exceptionType);
+		}
 	}
 	
 	@Test
-	public void givenMobileNumber_WhenNotProper_ShouldReturnFalse(){
-		UserValidation validator = new UserValidation();
-		boolean result = validator.checkMobNum("9123 9983910255");
-		Assert.assertFalse(result);
+	public void givenMobNumberNull_ShouldReturnNull(){
+		try{
+			String number = null;
+			UserValidation validator = new UserValidation();
+			boolean flag = validator.checkMobNum(number);
+			}catch(UserValidationException e){
+				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+			}
+		
+	} 
+	
+	@Test
+	public void givenMobNumberEmpty_ShouldReturnEmpty(){
+		try{
+			String number = "";
+			UserValidation validator = new UserValidation();
+			boolean flag = validator.checkMobNum(number);
+			}catch(UserValidationException e){
+				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
+			}
+		
 	}
 	
 	@Test
-	public void givenPassword_WhenProper_ShouldReturnTrue(){
+	public void givenPassword_WhenProper_ShouldReturnTrue() throws UserValidationException{
+		try{
 		UserValidation validator = new UserValidation();
 		boolean result = validator.checkPassword("Umesh@123");
 		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_PASSWORD, e.exceptionType);
+		}
 	}
 	
 	@Test
-	public void givenPassword_WhenNotProper_ShouldReturnFalse(){
-		UserValidation validator = new UserValidation();
-		boolean result = validator.checkPassword("umesh@123");
-		Assert.assertFalse(result);
+	public void givenPasswordNull_ShouldReturnNull(){
+		try{
+			String pass = null;
+			UserValidation validator = new UserValidation();
+			boolean flag = validator.checkPassword(pass);
+			}catch(UserValidationException e){
+				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+			}
+		
+	} 
+	
+	@Test
+	public void givenPasswordEmpty_ShouldReturnEmpty(){
+		try{
+			String pass = "";
+			UserValidation validator = new UserValidation();
+			boolean flag = validator.checkPassword(pass);
+			}catch(UserValidationException e){
+				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
+			}
+		
 	}
+
 }
 

@@ -2,6 +2,8 @@ package com.learning;
 
 import java.util.regex.Pattern;
 
+
+
 public class UserValidation {
 	private static final Pattern FIRST_NAME = Pattern.compile("^[A-Z]{1}[a-z]{2,}");
 	private static final Pattern LAST_NAME = Pattern.compile("[A-Z]{1}[a-z]{2,}");
@@ -12,32 +14,72 @@ public class UserValidation {
 	public static void main(String[] args) {
 		System.out.println("Welcome to User Validation Problem");
 	}
-	public String AnalyseMood(String mood){
-		if(mood.contains("sad")){
-			return "SAD";
+	public void nullEmptyException(String name) throws UserValidationException{
+		try{
+		if(name.length()==0){
+			throw new UserValidationException(UserValidationException.ExceptionType.ENTERED_EMPTY, "Enter proper message");
 		}
-		else{
-			return "HAPPY";
+		}catch(NullPointerException e){
+			throw new UserValidationException(UserValidationException.ExceptionType.ENTERED_NULL, "Enter proper message");
 		}
 	}
-	public boolean checkFirstName(String name) {
-        return FIRST_NAME.matcher(name).matches();
+
+	public boolean checkFirstName(String name) throws UserValidationException {
+		
+		nullEmptyException(name);
+		
+        boolean flag= FIRST_NAME.matcher(name).matches();
+        if(flag){
+        	return flag;
+        }
+        else{
+        	throw new UserValidationException(UserValidationException.ExceptionType.INVALID_FIRSTNAME, "Enter proper message");
+        }
+		
     }
 	
-	public boolean checkLastName(String name) {
-        return LAST_NAME.matcher(name).matches();
+	public boolean checkLastName(String name) throws UserValidationException {
+		nullEmptyException(name);
+        boolean flag = LAST_NAME.matcher(name).matches();
+        if(flag){
+        	return flag;
+        }
+        else{
+        	throw new UserValidationException(UserValidationException.ExceptionType.INVALID_LASTNAME, "Enter proper message");
+        }
     }
 
-	public boolean checkEmail(String name) {
-        return EMAIL.matcher(name).matches();
+	public boolean checkEmail (String name) throws UserValidationException{
+		nullEmptyException(name);
+        boolean flag= EMAIL.matcher(name).matches();
+        if(flag){
+        	return flag;
+        }
+        else{
+        	throw new UserValidationException(UserValidationException.ExceptionType.INVALID_EMAIL, "Enter proper message");
+        }
     }
 	
-	public boolean checkMobNum(String name) {
-        return MOBILE_NUMBER.matcher(name).matches();
+	public boolean checkMobNum(String name) throws UserValidationException{
+		nullEmptyException(name);
+        boolean flag = MOBILE_NUMBER.matcher(name).matches();
+        if(flag){
+        	return flag;
+        }
+        else{
+        	throw new UserValidationException(UserValidationException.ExceptionType.INVALID_MOBNUMBER, "Invalid mobile number");
+        }
     }
 	
-	public boolean checkPassword(String name) {
-        return PASSWORD.matcher(name).matches();
+	public boolean checkPassword(String name) throws UserValidationException{
+		nullEmptyException(name);
+        boolean flag = PASSWORD.matcher(name).matches();
+        if(flag){
+        	return flag;
+        }
+        else{
+        	throw new UserValidationException(UserValidationException.ExceptionType.INVALID_PASSWORD, "Enter proper message");
+        }
     }
 
 }

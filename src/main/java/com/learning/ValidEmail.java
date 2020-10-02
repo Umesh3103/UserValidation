@@ -43,10 +43,42 @@ public class ValidEmail {
 		
 	}
 	@Test
-	public void givenEmail_WhenValid_ShoultReturnTrue(){
+	public void givenEmail_WhenValid_ShoultReturnTrue() throws UserValidationException{
+		try{
 		UserValidation validator = new UserValidation();
 		boolean result = validator.checkEmail(this.email);
 		Assert.assertEquals(this.expectedResult, result);
+		}catch(UserValidationException e){
+			System.out.println(e.exceptionType);
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_EMAIL, e.exceptionType);
+		}
 	}
 	
+	@Test
+	public void givenEmail_WhenNull_ShouldReturnNullMessage(){
+		try{
+			String email = null;
+			this.email=email;
+			UserValidation validator = new UserValidation();
+			boolean result = validator.checkEmail(this.email);
+		}catch(UserValidationException e){
+			System.out.println(e.exceptionType);
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+		}
+		
+	}
+	
+	@Test
+	public void givenEmail_WhenEmpty_ShouldReturnEmptyMessage(){
+		try{
+			String email = "";
+			this.email=email;
+			UserValidation validator = new UserValidation();
+			boolean result = validator.checkEmail(this.email);
+		}catch(UserValidationException e){
+			System.out.println(e.exceptionType);
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
+		}
+		
+	}
 }
