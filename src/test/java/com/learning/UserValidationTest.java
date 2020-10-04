@@ -3,6 +3,7 @@ package com.learning;
 import org.junit.Test;
 
 import org.junit.Assert;
+import org.junit.Before;
 
 
 public class UserValidationTest {
@@ -11,177 +12,165 @@ public class UserValidationTest {
 	public void givenFirstName_WhenProper_ShouldReturnTrue() throws UserValidationException{
 		try{
 		UserValidation validator = new UserValidation();
-		boolean result = validator.checkFirstName("Umesh@123");
-		Assert.assertTrue(result);
+		boolean result = validator.firstName.validation("Umesh");
+		Assert.assertTrue(result);	
 		}catch(UserValidationException e){
 			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_FIRSTNAME, e.exceptionType);
 		}
 	}
-	
 	@Test
 	public void givenFirstNameNull_ShouldReturnNull(){
 		try{
-		String name = null;
 		UserValidation validator = new UserValidation();
-		boolean flag = validator.checkFirstName(name);
+		boolean result = validator.firstName.validation(null);
+		Assert.assertTrue(result);
 		}catch(UserValidationException e){
 			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
 		}
 		
 	}
-	
 	@Test
 	public void givenFirstNameEmpty_ShouldReturnEmpty(){
 		try{
-		String name = "";
 		UserValidation validator = new UserValidation();
-		boolean flag = validator.checkFirstName(name);
+		boolean result = validator.firstName.validation("");
+		Assert.assertTrue(result);
 		}catch(UserValidationException e){
 			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
 		}
 		
 	}
-	
 	@Test
-	public void givenLastName_WhenProper_ShouldReturnTrue() throws UserValidationException{
+	public void givenLastNameProper_ShouldReturnTrue(){
 		try{
 		UserValidation validator = new UserValidation();
-		boolean result = validator.checkLastName("Deora");
+		boolean result = validator.lastName.validation("Deora");
 		Assert.assertTrue(result);
 		}catch(UserValidationException e){
 			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_LASTNAME, e.exceptionType);
 		}
 		
 	}
-	
 	@Test
 	public void givenLastNameNull_ShouldReturnNull(){
 		try{
-			String name = null;
-			UserValidation validator = new UserValidation();
-			boolean flag = validator.checkLastName(name);
-			}catch(UserValidationException e){
-				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
-			}
+		UserValidation validator = new UserValidation();
+		boolean result = validator.lastName.validation(null);
+		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+		}
 		
 	}
-
 	@Test
 	public void givenLastNameEmpty_ShouldReturnEmpty(){
 		try{
-			String name = "";
-			UserValidation validator = new UserValidation();
-			boolean flag = validator.checkLastName(name);
-			}catch(UserValidationException e){
-				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
-			}
+		UserValidation validator = new UserValidation();
+		boolean result = validator.lastName.validation("");
+		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
+		}
 		
 	}
-	
 	@Test
-	public void givenEmail_WhenProper_ShouldReturnTrue() throws UserValidationException{
+	public void givenEmailProper_ShouldReturnTrue(){
 		try{
 		UserValidation validator = new UserValidation();
-		boolean result = validator.checkEmail("abc@gmail.com");
+		boolean result = validator.email.validation("abc@gmail.com");
 		Assert.assertTrue(result);
 		}catch(UserValidationException e){
 			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_EMAIL, e.exceptionType);
 		}
+		
 	}
-	
 	@Test
 	public void givenEmailNull_ShouldReturnNull(){
 		try{
-			String email = null;
-			UserValidation validator = new UserValidation();
-			boolean flag = validator.checkEmail(email);
-			}catch(UserValidationException e){
-				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
-			}
+		UserValidation validator = new UserValidation();
+		boolean result = validator.email.validation(null);
+		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+		}
 		
-	} 
-	
+	}
 	@Test
 	public void givenEmailEmpty_ShouldReturnEmpty(){
 		try{
-			String email = "";
-			UserValidation validator = new UserValidation();
-			boolean flag = validator.checkEmail(email);
-			}catch(UserValidationException e){
-				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
-			}
-		
-	}
-	
-	@Test
-	public void givenMobileNumber_WhenProper_ShouldReturnTrue() throws UserValidationException{
-		try{
 		UserValidation validator = new UserValidation();
-		boolean result = validator.checkMobNum("91 9983910255");
+		boolean result = validator.email.validation("");
 		Assert.assertTrue(result);
 		}catch(UserValidationException e){
-			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_MOBNUMBER, e.exceptionType);
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
 		}
-	}
-	
-	@Test
-	public void givenMobNumberNull_ShouldReturnNull(){
-		try{
-			String number = null;
-			UserValidation validator = new UserValidation();
-			boolean flag = validator.checkMobNum(number);
-			}catch(UserValidationException e){
-				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
-			}
-		
-	} 
-	
-	@Test
-	public void givenMobNumberEmpty_ShouldReturnEmpty(){
-		try{
-			String number = "";
-			UserValidation validator = new UserValidation();
-			boolean flag = validator.checkMobNum(number);
-			}catch(UserValidationException e){
-				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
-			}
 		
 	}
-	
 	@Test
-	public void givenPassword_WhenProper_ShouldReturnTrue() throws UserValidationException{
+	public void givenPasswordProper_ShouldReturnTrue(){
 		try{
 		UserValidation validator = new UserValidation();
-		boolean result = validator.checkPassword("Umesh@123");
+		boolean result = validator.passWord.validation("Umesh123@");
 		Assert.assertTrue(result);
 		}catch(UserValidationException e){
 			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_PASSWORD, e.exceptionType);
 		}
+		
 	}
-	
 	@Test
 	public void givenPasswordNull_ShouldReturnNull(){
 		try{
-			String pass = null;
-			UserValidation validator = new UserValidation();
-			boolean flag = validator.checkPassword(pass);
-			}catch(UserValidationException e){
-				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
-			}
+		UserValidation validator = new UserValidation();
+		boolean result = validator.passWord.validation(null);
+		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+		}
 		
-	} 
-	
+	}
 	@Test
 	public void givenPasswordEmpty_ShouldReturnEmpty(){
 		try{
-			String pass = "";
-			UserValidation validator = new UserValidation();
-			boolean flag = validator.checkPassword(pass);
-			}catch(UserValidationException e){
-				Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
-			}
+		UserValidation validator = new UserValidation();
+		boolean result = validator.passWord.validation("");
+		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
+		}
 		
 	}
-
+	@Test
+	public void givenMobileNumberProper_ShouldReturnTrue(){
+		try{
+		UserValidation validator = new UserValidation();
+		boolean result = validator.mobileNumber.validation("91 6394071789");
+		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.INVALID_MOBNUMBER, e.exceptionType);
+		}
+		
+	}
+	@Test
+	public void givenMobileNumberNull_ShouldReturnNull(){
+		try{
+		UserValidation validator = new UserValidation();
+		boolean result = validator.mobileNumber.validation(null);
+		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_NULL, e.exceptionType);
+		}
+		
+	}
+	@Test
+	public void givenMobileNumberEmpty_ShouldReturnEmpty(){
+		try{
+		UserValidation validator = new UserValidation();
+		boolean result = validator.mobileNumber.validation("");
+		Assert.assertTrue(result);
+		}catch(UserValidationException e){
+			Assert.assertEquals(UserValidationException.ExceptionType.ENTERED_EMPTY, e.exceptionType);
+		}
+		
+	}
 }
 
